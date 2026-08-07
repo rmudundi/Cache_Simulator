@@ -1,0 +1,35 @@
+R 0x00400000
+R 0x00400004
+R 0x00400008
+R 0x0040000C
+R 0x00400010
+W 0x00400014
+# -------------------------------------------------------------
+# Section 2: Repeated Loop Access (Tests Temporal Locality)
+# Alternating accesses between two close addresses
+# -------------------------------------------------------------
+R 0x00400000
+R 0x00400004
+R 0x00400000
+R 0x00400004
+W 0x00400000
+
+# -------------------------------------------------------------
+# Section 3: Large Stride / Potential Conflicts
+# Jumping across large address boundaries
+# -------------------------------------------------------------
+R 0x00400000
+R 0x00410000
+R 0x00420000
+R 0x00400000
+R 0x00410000
+
+# -------------------------------------------------------------
+# Section 4: Data Stack & Heap Access
+# Simulating real program accesses across memory segments
+# -------------------------------------------------------------
+R 0x7FFF0000
+W 0x7FFF0004
+R 0x10008000
+W 0x10008004
+R 0x7FFF0000
