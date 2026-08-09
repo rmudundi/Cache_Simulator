@@ -7,7 +7,9 @@
 
 
 Cache::Cache(int c_size, int b_size, int a, int addr) {
-            
+           
+    counter = 0;
+
     //assign variables
     cache_size = c_size;
     block_size = b_size;
@@ -22,9 +24,8 @@ Cache::Cache(int c_size, int b_size, int a, int addr) {
     }
 
     //make cache
-    table.resize(num_set);
-    for(int i=0;i<table.size();i++){
-        table[i] = Cacheset(associativity);
+    for(int i=0;i<num_set;i++){
+        table.emplace_back(associativity);   
     }
 
     o = std::log2(block_size);
@@ -42,8 +43,14 @@ Cache::Cache(int c_size, int b_size, int a, int addr) {
 }
 
 bool Cache::search_cache(long int tag, long int index){
-    return table[index].check(tag);
+    counter++;
+    return table[index].check(tag,counter);
 }
+
+void Cache::evict(long int tag, long int index){
+
+}
+
 
 int Cache::tag() const{
     return t;

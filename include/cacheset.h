@@ -1,14 +1,18 @@
+#ifndef CACHESET_H
+#define CACHESET_H
 #include <iostream>
+#include <cacheline.h>
 
 
 class Cacheset{
 
-    std::vector<Line_LRU> lines;
+    std::vector<Cacheline> lines;
 
     public: 
-        CacheSet(int a);
-        check(int tag);
-    
+        Cacheset(int a);
 
+        bool check(long int tag,long int counter);
     
 };
+
+#endif

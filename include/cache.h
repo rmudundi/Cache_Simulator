@@ -1,6 +1,9 @@
-#pragma once
+#ifndef CACHE_H
+#define CACHE_H
+#include <vector>
+#include <cacheset.h>
 
-Class Cache{
+class Cache{
     int cache_size;
     int block_size;
     int num_set;
@@ -9,12 +12,16 @@ Class Cache{
     int i;
     int t;
 
+    long int counter;
+
     std::vector<Cacheset> table;
 
     public: 
         Cache(int c_size, int b_size, int a, int addr);
 
-        search_cache(long int tag, long int index);
+        bool search_cache(long int tag, long int index);
+
+        void evict(long int tag, long int index);
 
         int offset() const;
 
@@ -26,3 +33,6 @@ Class Cache{
         
 
 };
+
+
+#endif

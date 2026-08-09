@@ -11,8 +11,8 @@ int main(){
     int block_size;
     int address;
     int associativity;
-    std::string t_bit;
-    std::string i_bit;
+    int t_bit;
+    int i_bit;
     long int tg;
     long int idx;
     
@@ -28,6 +28,7 @@ int main(){
     std::cin >> associativity;
 
     //makes cache vector
+    cache_size *= 1024;
     Cache myCache(cache_size,block_size,associativity,address);
     
 
@@ -52,14 +53,14 @@ int main(){
         hex_addr = hex_addr >> i_bit;
         tg = hex_addr;
 
-        myCache.search_cache(tg,idx);
+        
+        //check in myCache for entry
+        if(myCache.search_cache(tg, idx) == 1){
+            std::cout << "HIT: " + ad + " already in Cache" << std::endl;
+        }else{
+            myCache.evict(tg,idx);
+        }
     }
-
-
-    //access addresses in trace file
-    //read memories and process into caches
-
-
 
 
     //print stats or put stats into a folder
