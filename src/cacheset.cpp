@@ -1,11 +1,44 @@
 #include <iostream>
 #include <cacheline.h>
 #include <cache.h>
+#include <climits>
 
 //constructor
 Cacheset::Cacheset(int a){
-    lines.emplace_back();
+    size = a;
+    for(int i=0;i<a;i++){
+        lines.emplace_back();
+    }
+} 
+
+void Cacheset::enter_entry(long int tag,long int counter){
+    int full = 1;
+    for(int i = 0;i<lines.size();i++){
+        if(lines[i].get_valid() == 0){
+            //empty slot to fill
+            full = 0;
+            lines[i].set_tag(tag);
+            lines[i].set_LRU(counter);
+            lines[i].set_valid(1);
+            break;
+        }
+    }
+    if(full==1){
+        //find lowest LRU and change the tag for that;
+        int low = INT_MAX; 
+        int save = 0;
+        for(int i = 0;i<lines.size();i++){
+            if (lines[i].get_LRU() < low) {
+                low = lines[i].get_LRU();
+                save = i;
+            }
+        }
+        lines[save].set_LRU(counter);
+        lines[save].set_tag(tag);
+        lines[save].set_valid(1);
+    }
 }
+
 
 bool Cacheset::check(long int tag, long int counter){
 
@@ -17,4 +50,8 @@ bool Cacheset::check(long int tag, long int counter){
         }
     }
     return 0; //miss 
+}
+
+int Cacheset::get_size(){
+    return size;
 }

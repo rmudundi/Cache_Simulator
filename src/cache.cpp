@@ -3,7 +3,7 @@
 #include <vector>
 #include <cacheset.h>
 #include <cache.h>
-
+#include <climits>
 
 
 Cache::Cache(int c_size, int b_size, int a, int addr) {
@@ -33,9 +33,9 @@ Cache::Cache(int c_size, int b_size, int a, int addr) {
     t = addr - i - o;
 
     //print widths
-    std::cout << "Offset: " << o << "bits" << std::endl;
-    std::cout << "Index: " << i << "bits" << std::endl;
-    std::cout << "Tag: " << t << "bits" << std::endl;
+    std::cout << "Offset: " << o << " bits" << std::endl;
+    std::cout << "Index: " << i << " bits" << std::endl;
+    std::cout << "Tag: " << t << " bits" << std::endl;
     std::cout << "Number of Lines: " << num_set << std::endl;
 
     //handle errors later
@@ -48,7 +48,8 @@ bool Cache::search_cache(long int tag, long int index){
 }
 
 void Cache::evict(long int tag, long int index){
-
+    //set new tag in index
+    table[index].enter_entry(tag, counter);
 }
 
 

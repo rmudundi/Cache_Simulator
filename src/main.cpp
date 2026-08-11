@@ -31,10 +31,13 @@ int main(){
     cache_size *= 1024;
     Cache myCache(cache_size,block_size,associativity,address);
     
-
-    std::ifstream f("../trace/sample.trace");
-    
+    std::cout << "Opening File..." << std::endl;
+    std::ifstream f("trace/sample.trace");
     std::string ad;
+
+    if(!f.is_open()){
+        std::cout << "Faild to open file!" << std::endl;
+    }
 
     while(std::getline(f,ad)){
         std::cout << "Processing:" << ad << std::endl; //0x12345 67 8
@@ -58,6 +61,7 @@ int main(){
         if(myCache.search_cache(tg, idx) == 1){
             std::cout << "HIT: " + ad + " already in Cache" << std::endl;
         }else{
+            std::cout << "MISS" << std::endl;
             myCache.evict(tg,idx);
         }
     }

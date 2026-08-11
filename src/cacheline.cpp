@@ -16,7 +16,6 @@ void Cacheline::set_valid(bool v){
 
 
 void Cacheline::set_LRU(long int time){
-   //will do later
    LRU = time;
 }
 
