@@ -30,6 +30,8 @@ class Cache{
         int tag() const;
 
         int num_sets() const;
+
+        int get_counter() const;
         
 
 };

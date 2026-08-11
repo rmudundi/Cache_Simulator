@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 #include <cmath>
-
+#include <stats.h>
 int main(){
     //testing 32 bit address, 4KB cache size, and 16 byte blocks, direct
 
@@ -30,6 +30,7 @@ int main(){
     //makes cache vector
     cache_size *= 1024;
     Cache myCache(cache_size,block_size,associativity,address);
+    Stats myStats;
     
     std::cout << "Opening File..." << std::endl;
     std::ifstream f("trace/sample.trace");
@@ -41,7 +42,8 @@ int main(){
 
     while(std::getline(f,ad)){
         std::cout << "Processing:" << ad << std::endl; //0x12345 67 8
-        
+        myStats.count_inst();
+
         //converted to hex
         long int hex_addr = std::stoul(ad,nullptr,16); 
 
@@ -60,15 +62,21 @@ int main(){
         //check in myCache for entry
         if(myCache.search_cache(tg, idx) == 1){
             std::cout << "HIT: " + ad + " already in Cache" << std::endl;
+            myStats.update_hit();
+            
         }else{
             std::cout << "MISS" << std::endl;
             myCache.evict(tg,idx);
+            myStats.update_miss();
         }
     }
 
+    std::cout << std::endl;
+    myStats.set_cycles(myCache.get_counter());
+    myStats.rates();
+    std::cout << "TRACE FILE COMPLETE" << std::endl;
 
-    //print stats or put stats into a folder
-
-
+    //print stats
+    myStats.print_results();
 
 }
