@@ -13,6 +13,7 @@ Cacheset::Cacheset(int a){
 
 void Cacheset::enter_entry(long int tag,long int counter){
     int full = 1;
+    //std::cout << "M" << " " << tag << " "  << counter << std::endl;
     for(int i = 0;i<lines.size();i++){
         if(lines[i].get_valid() == 0){
             //empty slot to fill
@@ -46,6 +47,7 @@ bool Cacheset::check(long int tag, long int counter){
     for(int i=0;i<lines.size();i++){
         if(lines[i].get_tag() == tag && lines[i].get_valid() == 1){ //hit and LRU updated
             lines[i].set_LRU(counter);
+            //std::cout << "H: " << tag << " " << counter << std::endl;
             return 1;
         }
     }

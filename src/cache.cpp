@@ -17,6 +17,7 @@ Cache::Cache(int c_size, int b_size, int a, int addr) {
     //find num of sets/lines
     if(a==0){
         num_set = 1;
+        associativity = cache_size/block_size;
     }else{
         associativity = a;
         num_set = (cache_size/block_size)/associativity;
@@ -49,6 +50,7 @@ bool Cache::search_cache(long int tag, long int index){
 
 void Cache::evict(long int tag, long int index){
     //set new tag in index
+    counter += 4;
     table[index].enter_entry(tag, counter);
 }
 
