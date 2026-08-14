@@ -11,8 +11,8 @@ Part 1:
     - Hit = 1 cycle
     - Miss = 5 cycles
 - Debugged heap corruption using Valgrind
-- Claude used to understand how to set up the classes, syntax, and creating trace file
-- Learned how to do git add and commit in terminal
+- Claude used to understand how to set up the classes, syntax, debugging and creating the trace file
+- Learned how to do git add and commit in terminal 
 
 Part 2:
 
