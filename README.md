@@ -1,6 +1,6 @@
 # Cache Simulator
 
-- Build a configurable C++ cache simulator(direct-mapped, Set-Associative, Fully-Associative) with LRU eviction, cycle cost modeling, and hit/miss statistics
+- Built a configurable C++ cache simulator(direct-mapped, Set-Associative, Fully-Associative) with LRU eviction, cycle cost modeling, and hit/miss statistics
 
 Part 1:
 
