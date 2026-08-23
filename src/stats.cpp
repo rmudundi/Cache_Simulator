@@ -34,6 +34,14 @@ void Stats::rates(){
     miss_rate = miss/instructions * 100;
 }
 
+void Stats::set_clocktime(long int t){
+    time = t;
+}
+
+long int Stats::clocktime(){
+    return time;
+}
+
 void Stats::print_results(){
     std::cout << "Stats:" << std::endl;
     std::cout << "-----------------------------" << std::endl;
@@ -43,5 +51,6 @@ void Stats::print_results(){
     std::cout << std::endl;
     std::cout << "Each miss takes 5 cycles and each hit takes 1 cycle" << std::endl;
     std::cout << "Final Cycle Count: " << cycles << std::endl;
+    std::cout << "Execution Time: " << time << std::endl;
 }
 

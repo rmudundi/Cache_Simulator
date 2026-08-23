@@ -4,6 +4,8 @@
 #include <string>
 #include <cmath>
 #include <stats.h>
+#include <chrono>
+
 int main(){
     //testing 32 bit address, 4KB cache size, and 16 byte blocks, direct
 
@@ -17,7 +19,7 @@ int main(){
     long int idx;
     
 
-    std::cout << "Cache Simulator:" << std::endl;
+    std::cout << "Vector Based Cache Simulator:" << std::endl;
     std::cout << "Enter Cache Size(KB):" << std::endl;
     std::cin >> cache_size;
     std::cout << "Enter Block Size(Bytes):" << std::endl;
@@ -39,6 +41,8 @@ int main(){
     if(!f.is_open()){
         std::cout << "Faild to open file!" << std::endl;
     }
+
+    auto start = std::chrono::high_resolution_clock::now();
 
     while(std::getline(f,ad)){
         std::cout << "Processing:" << ad << std::endl; //0x12345 67 8
@@ -71,8 +75,13 @@ int main(){
         }
     }
 
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end-start);
+
+    std::cout << "Time: " << duration.count() << std::endl;
     std::cout << std::endl;
     myStats.set_cycles(myCache.get_counter());
+    myState.set_time(duration.count());
     myStats.rates();
     std::cout << "TRACE FILE COMPLETE" << std::endl;
 

@@ -9,6 +9,7 @@ class Stats{
     double hit_rate;
     double miss_rate;
     int cycles;
+    long int time; //measure in microseconds
 
     public: 
 
