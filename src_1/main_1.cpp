@@ -1,13 +1,11 @@
 #include <iostream>
-#include <cache.h>
 #include <fstream>
 #include <string>
-#include <cmath>
-#include <stats.h>
 #include <chrono>
+#include <stats.h>
+#include <hash.h>
 
 int main(){
-    //testing 32 bit address, 4KB cache size, and 16 byte blocks, direct
 
     int cache_size;
     int block_size;
@@ -17,9 +15,8 @@ int main(){
     int i_bit;
     long int tg;
     long int idx;
-    
 
-    std::cout << "Vector-Based Cache Simulator:" << std::endl;
+    std::cout << "Hash-Based Cache Simulator:" << std::endl;
     std::cout << "Enter Cache Size(KB):" << std::endl;
     std::cin >> cache_size;
     std::cout << "Enter Block Size(Bytes):" << std::endl;
@@ -31,11 +28,11 @@ int main(){
 
     //makes cache vector
     cache_size *= 1024;
-    Cache myCache(cache_size,block_size,associativity,address);
+    Hash HashMap(cache_size,block_size,associativity,address);
     Stats myStats;
-    
-    std::cout << "Opening File..." << std::endl;
-    std::ifstream f("trace/sample.trace");
+
+    std::cout << "Opening File...." << std::endl;
+    std::ifstream f("trace/sample.trace"); //might need to change to variable when testing multiple files
     std::string ad;
 
     if(!f.is_open()){
@@ -45,46 +42,38 @@ int main(){
     auto start = std::chrono::high_resolution_clock::now();
 
     while(std::getline(f,ad)){
-        std::cout << "Processing:" << ad << std::endl; //0x12345 67 8
+        std::cout << "Processing: " << ad << std::endl;
         myStats.count_inst();
 
         //converted to hex
-        long int hex_addr = std::stoul(ad,nullptr,16); 
+        long int hex_addr = std::stoul(ad,nullptr,16);
 
-        //retirves bit size functions from Cache class
-        t_bit = myCache.tag();
-        i_bit = myCache.index();
-
-        //shift addr by offset bits
-        hex_addr = hex_addr >> myCache.offset();
-        //(1<<i_bit) makes the mask of 1's
-        idx = ((1 << i_bit)-1) & hex_addr; 
+        hex_addr = hex_addr >> HashMap.offset(); //removes the offset digits
+            
+        //example, idx = 2 bits so 100, 100 - 1, 011 = bit mask of 2 1's
+        idx = ((1<<i_bit)-1) & hex_addr;
         hex_addr = hex_addr >> i_bit;
         tg = hex_addr;
 
-        
-        //check in myCache for entry
-        if(myCache.search_cache(tg, idx) == 1){
-            std::cout << "HIT: " + ad + " already in Cache" << std::endl;
-            myStats.update_hit();
-            
-        }else{
-            std::cout << "MISS" << std::endl;
-            myCache.evict(tg,idx);
-            myStats.update_miss();
+        //logic for hit and miss
+        if(HashMap.search(idx,tg)){
+            HashMap.evict(idx,tg);
         }
+            
     }
+
+    
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end-start);
 
     std::cout << std::endl;
-    myStats.set_cycles(myCache.get_counter());
+    myStats.set_cycles(HashMap.get_counter());
     myStats.set_clocktime(duration.count());
     myStats.rates();
     std::cout << "TRACE FILE COMPLETE" << std::endl;
 
-    //print stats
+    //print results
     myStats.print_results();
 
 }

@@ -23,6 +23,10 @@ class Stats{
 
         void set_cycles(long int counter);
 
+        void set_clocktime(long int time);
+
+        long int clocktime();
+
         void rates();
 
         void print_results();

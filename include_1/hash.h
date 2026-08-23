@@ -1,4 +1,8 @@
+#ifndef HASH_H
+#define HASH_H
 #include <cacheline.h>
+#include <vector>
+#include <unordered_map>
 
 class Hash{
 
@@ -18,6 +22,10 @@ class Hash{
 
         Hash(int c, int b, int a, int addr);
 
+        bool search(int i, int t);
+
+        void evict(int i, int t);
+
         int tag();
 
         int index();
@@ -27,4 +35,7 @@ class Hash{
         int num_sets();
 
         int get_counter();
+
 };
+
+#endif

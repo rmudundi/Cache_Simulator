@@ -74,3 +74,4 @@ int Cache::num_sets() const{
 int Cache::get_counter() const{
     return counter;
 }
+
