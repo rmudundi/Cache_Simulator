@@ -29,7 +29,7 @@ class Stats{
 
         void rates();
 
-        void print_results();
+        void results(Stats v, Stats h);
 
 
 };

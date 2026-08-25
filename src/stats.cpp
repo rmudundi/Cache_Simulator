@@ -42,15 +42,24 @@ long int Stats::clocktime(){
     return time;
 }
 
-void Stats::print_results(){
-    std::cout << "Stats:" << std::endl;
-    std::cout << "-----------------------------" << std::endl;
-    std::cout << "Total # of Instructions: " << instructions << std::endl;
-    std::cout << "Hits Rate: " << hit_rate << "%" << std::endl;
-    std::cout << "Miss Rate: " << miss_rate << "%" << std::endl;
+void Stats::results(Stats v, Stats h){
     std::cout << std::endl;
-    std::cout << "Each miss takes 5 cycles and each hit takes 1 cycle" << std::endl;
-    std::cout << "Final Cycle Count: " << cycles << std::endl;
-    std::cout << "Execution Time: " << time << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "Final Stats:" << std::endl;
+    std::cout << "-----------------------------" << std::endl;
+    std::cout << "Total # of Instructions: " << v.instructions << std::endl;
+    std::cout << "Miss = 5 cycles" << std::endl;
+    std::cout << "Hit = 1 cycle" << std::endl;
+    std::cout << "            -----------------------------" << std::endl;
+    std::cout << "                Vector    |     Hash     " << std::endl;
+    std::cout << "            -----------------------------" << std::endl;
+    std::cout << "Hits Rate:       " << v.hit_rate << "%" << "      |      " << h.hit_rate << "%" << std::endl;
+    std::cout << "Miss Rate:       " << v.miss_rate << "%" << "      |      " << h.miss_rate << "%" << std::endl;
+    std::cout << "# of Cycles:     " << v.cycles  << "       |       " << h.cycles << std::endl;
+    std::cout << "Execution Time:  " << v.time << " us" << "   |      " << h.time << " us" << std::endl;
+    //std::cout << std::endl;
+    
+    //std::cout << "H: " << h.hit << " " << h.miss << std::endl;
+    //std::cout << "V: " << v.hit << " " << v.miss << std::endl;
 }
 

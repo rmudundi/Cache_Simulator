@@ -22,7 +22,7 @@ class Hash{
 
         Hash(int c, int b, int a, int addr);
 
-        bool search(int i, int t);
+        int search(int i, int t, int& m);
 
         void evict(int i, int t);
 

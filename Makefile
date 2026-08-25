@@ -1,11 +1,8 @@
-output: main.o cache.o cacheset.o cacheline.o stats.o hash.o main_1.o
-	g++ main.o cache.o cacheset.o cacheline.o stats.o hash.o main_1.o -o a.out
+output: main.o cache.o cacheset.o cacheline.o stats.o hash.o 
+	g++ main.o cache.o cacheset.o cacheline.o stats.o hash.o -o a.out
 
 main.o: src/main.cpp
-	g++ -g -c -I include src/main.cpp
-
-main_1.o: src_1/main_1.cpp
-	g++ -g -c -I include -I include_1 src_1/main_1.cpp
+	g++ -g -c -I include -I include_1 src/main.cpp
 
 cache.o: src/cache.cpp include/cache.h
 	g++ -g -c -I include src/cache.cpp
