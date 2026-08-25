@@ -28,8 +28,6 @@ void Stats::set_cycles(long int counter){
 }
 
 void Stats::rates(){
-    //std::cout << hit << std::endl;
-    //std::cout << miss << std::endl;
     hit_rate = hit/instructions * 100;
     miss_rate = miss/instructions * 100;
 }
@@ -57,9 +55,5 @@ void Stats::results(Stats v, Stats h){
     std::cout << "Miss Rate:       " << v.miss_rate << "%" << "      |      " << h.miss_rate << "%" << std::endl;
     std::cout << "# of Cycles:     " << v.cycles  << "       |       " << h.cycles << std::endl;
     std::cout << "Execution Time:  " << v.time << " us" << "   |      " << h.time << " us" << std::endl;
-    //std::cout << std::endl;
-    
-    //std::cout << "H: " << h.hit << " " << h.miss << std::endl;
-    //std::cout << "V: " << v.hit << " " << v.miss << std::endl;
 }
 

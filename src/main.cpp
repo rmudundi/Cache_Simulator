@@ -91,7 +91,11 @@ int main(){
     vector_stats.rates();
     std::cout << "TRACE FILE COMPLETE FOR Vector Cache" << std::endl;
 
+    std::cout << std::endl;
+
     f.close(); 
+
+    //repeat again with new filestream for hash map
 
     std::cout << "Opening File ...." << std::endl;
     std::ifstream ff("trace/sample.trace"); //might need to turn to a variable
@@ -118,9 +122,8 @@ int main(){
         tg = hex_addr;
 
         //logic for hit and miss
-        bool temp = 0;
         
-        int m;
+        int m; //passed by ref
         if(!HashMap.search(idx,tg,m)){
             //miss
 
@@ -128,13 +131,11 @@ int main(){
             if(!m){
                 std::cout << "MISS" << std::endl;
                 hash_stats.update_miss();
-                //temp = 1;
             }else{
                 //miss when full = 1
                 std::cout << "MISS" << std::endl;
                 hash_stats.update_miss();
                 HashMap.evict(idx,tg);
-                //temp = 1;
             }
             
         }
@@ -161,6 +162,5 @@ int main(){
 
     //print stats
     Stats final_stats;
-
     final_stats.results(vector_stats, hash_stats);
 }

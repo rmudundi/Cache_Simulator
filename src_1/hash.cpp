@@ -8,7 +8,6 @@
 Hash::Hash(int c, int b, int a, int addr){
 
     counter = 0;
-
     cache_size = c;
     block_size = b;
 
@@ -21,22 +20,14 @@ Hash::Hash(int c, int b, int a, int addr){
         num_set = (cache_size/block_size)/associativity;
     }
 
-    // for(int i=0;i<num_set;i++){
-    //     hashmap[i] = std::vector<Cacheline>(associativity);
-    // }
+
 
     o = std::log2(block_size);
     i = std::log2(num_set);
     t = addr - i - o;
-
-    //print widths
-    //std::cout << "Offset: " << o << " bits" << std::endl;
-    //std::cout << "Index: " << i << " bits" << std::endl;
-    //std::cout << "Tag: " << t << " bits" << std::endl;
-    //std::cout << "Number of Lines: " << num_set << std::endl;
 }
 
-//inserts in miss if empty, hit, but not miss if full 
+//returns if its a hit or miss, returns m to determine what type of miss
 int Hash::search(int idx, int t, int& m){ //miss = 0, hit = 1
     counter++;
     int check = 0;
@@ -77,7 +68,8 @@ int Hash::search(int idx, int t, int& m){ //miss = 0, hit = 1
     return 0;
 }
 
-//takes care of misses when full, 
+//takes care of misses when full
+
 void Hash::evict(int id, int t){
     counter+=4;
     int low = INT_MAX;
