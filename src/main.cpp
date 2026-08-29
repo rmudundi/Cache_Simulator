@@ -41,7 +41,7 @@ int main(){
     
     //open the file
     std::cout << "Opening File..." << std::endl;
-    std::ifstream f("trace/sample.trace");
+    std::ifstream f("trace/test.trace");
     std::string ad;
 
     //file error handling
@@ -52,7 +52,7 @@ int main(){
     auto start = std::chrono::high_resolution_clock::now();
 
     while(std::getline(f,ad)){
-        std::cout << "Processing:" << ad << std::endl; //0x12345 67 8
+        std::cout << "Processing: " << ad << std::endl; //0x12345 67 8
         vector_stats.count_inst();
 
         //converted to hex
@@ -66,6 +66,7 @@ int main(){
         hex_addr = hex_addr >> myCache.offset();
         //(1<<i_bit) makes the mask of 1's
         idx = ((1 << i_bit)-1) & hex_addr; 
+        std::cout << "IDX: " << idx << std::endl;
         hex_addr = hex_addr >> i_bit;
         tg = hex_addr;
 
@@ -97,8 +98,8 @@ int main(){
 
     //repeat again with new filestream for hash map
 
-    std::cout << "Opening File ...." << std::endl;
-    std::ifstream ff("trace/sample.trace"); //might need to turn to a variable
+    std::cout << "Opening File ..." << std::endl;
+    std::ifstream ff("trace/test.trace"); //might need to turn to a variable
     std::string ad1;
 
     if(!ff.is_open()){
@@ -141,7 +142,7 @@ int main(){
         }
         else{
             //hit
-            std::cout << "HIT: " << ad1 << "already in Cache" << std::endl;
+            std::cout << "HIT: " << ad1 << " already in Cache" << std::endl;
             hash_stats.update_hit();
             
         }

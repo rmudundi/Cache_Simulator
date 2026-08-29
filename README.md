@@ -22,7 +22,10 @@ Part 1:
 
 Part 2:
 
-- Currently working on to expand cache complexity
+- Implemented as a unordered_map, each bucket is a vector/cacheline
+- Added hash.h and hash.cpp
+- main.cpp runs both implementation and prints out results
+
 
 
 

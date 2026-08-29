@@ -40,7 +40,8 @@ int Hash::search(int idx, int t, int& m){ //miss = 0, hit = 1
             }
 
             if(hashmap[idx][i].get_tag() == t && hashmap[idx][i].get_valid()== 1 ){
-                std::cout << "HIT" << std::endl;
+                //std::cout << "HIT" << std::endl;
+                hashmap[idx][i].set_LRU(counter);
                 return 1;
             }
         }
@@ -54,7 +55,7 @@ int Hash::search(int idx, int t, int& m){ //miss = 0, hit = 1
     }else{
         //miss when empty
         m = 0;
-        std::cout << "MISS" << std::endl;
+        //std::cout << "MISS" << std::endl;
         Cacheline obj;
         counter += 4;
         obj.set_valid(1);
@@ -80,6 +81,8 @@ void Hash::evict(int id, int t){
             save = i;
         }
     }
+    //std::cout << "SAVE: " << save << std::endl;
+    //std::cout << "PREV tag: " << hashmap[id][save].set_tag
     hashmap[id][save].set_tag(t);
     hashmap[id][save].set_LRU(counter);
     hashmap[id][save].set_valid(1);
