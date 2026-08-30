@@ -6,10 +6,7 @@ Observations:
 - Cycle Counts is the same across implementations because that depends on hit/miss counts.
 - Execution time is different since the access time in a unordered_map is O(1) compared to vector O(n)
 
-Average Efficiency = 
-- Full:   
-- Set:     
-- Direct:  
+
 
 Part 1:
 

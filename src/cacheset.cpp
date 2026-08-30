@@ -35,12 +35,12 @@ void Cacheset::enter_entry(long int tag,long int counter){
                 save = i;
             }
         }
-        std::cout << "SAVE: " << save << std::endl;
-        std::cout << "Prev tag: " << lines[save].get_tag() << std::endl;
+        //std::cout << "SAVE: " << save << std::endl;
+        //std::cout << "Prev tag: " << lines[save].get_tag() << std::endl;
         lines[save].set_LRU(counter);
         lines[save].set_tag(tag);
         lines[save].set_valid(1);
-        std::cout << "New tag: " << lines[save].get_tag() << std::endl;
+        //std::cout << "New tag: " << lines[save].get_tag() << std::endl;
     }
 }
 

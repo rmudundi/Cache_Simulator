@@ -34,10 +34,10 @@ Cache::Cache(int c_size, int b_size, int a, int addr) {
     t = addr - i - o;
 
     //print widths
-    std::cout << "Offset: " << o << " bits" << std::endl;
-    std::cout << "Index: " << i << " bits" << std::endl;
-    std::cout << "Tag: " << t << " bits" << std::endl;
-    std::cout << "Number of Lines: " << num_set << std::endl;
+    //std::cout << "Offset: " << o << " bits" << std::endl;
+    //std::cout << "Index: " << i << " bits" << std::endl;
+    //std::cout << "Tag: " << t << " bits" << std::endl;
+    //std::cout << "Number of Lines: " << num_set << std::endl;
 
     //handle errors later
             
