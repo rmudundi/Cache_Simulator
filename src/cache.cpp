@@ -39,7 +39,7 @@ Cache::Cache(int c_size, int b_size, int a, int addr) {
     //std::cout << "Tag: " << t << " bits" << std::endl;
     //std::cout << "Number of Lines: " << num_set << std::endl;
 
-    //handle errors later
+    
             
 }
 
@@ -49,7 +49,7 @@ bool Cache::search_cache(long int tag, long int index){
 }
 
 void Cache::evict(long int tag, long int index){
-    //set new tag in index
+    
     counter += 4;
     table[index].enter_entry(tag, counter);
 }

@@ -117,8 +117,6 @@ double test_hash(int associativity, int cache_size, int block_size, int address)
     
 
         //repeat again with new filestream for hash map
-
-       
         std::ifstream ff("trace/sample.trace"); //might need to turn to a variable
         std::string ad1;
 
@@ -143,7 +141,6 @@ double test_hash(int associativity, int cache_size, int block_size, int address)
             tg = hex_addr;
 
             //logic for hit and miss
-            
             int m; //passed by ref
             if(!HashMap.search(idx,tg,m)){
                 //miss
@@ -152,9 +149,10 @@ double test_hash(int associativity, int cache_size, int block_size, int address)
                 if(!m){
                    
                     hash_stats.update_miss();
+
                 }else{
+
                     //miss when full = 1
-                   
                     hash_stats.update_miss();
                     HashMap.evict(idx,tg);
                 }
@@ -162,22 +160,21 @@ double test_hash(int associativity, int cache_size, int block_size, int address)
             }
             else{
                 //hit
-                
                 hash_stats.update_hit();
                 
             }
 
-            //return hash_stats;
+            
         }
 
         auto end1 = std::chrono::high_resolution_clock::now();
         auto duration1 = std::chrono::duration_cast<std::chrono::microseconds>(end1-start1);
 
-        //std::cout << std::endl;
+        
         hash_stats.set_cycles(HashMap.get_counter());
         hash_stats.set_clocktime(duration1.count());
         hash_stats.rates();
-        //std::cout << "TRACE FILE COMPLETE for Hash Cache" << std::endl;
+        
 
         ff.close();
         a++;
@@ -200,8 +197,7 @@ double test_hash(int associativity, int cache_size, int block_size, int address)
 
 
 int main(){
-    //testing 32 bit address, 4KB cache size, and 16 byte blocks, direct
-
+    //testing 32 bit address, 4KB cache size, and 16 byte blocks
     int cache_size;
     int block_size;
     int address;
